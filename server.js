@@ -1,11 +1,17 @@
 import 'dotenv/config'
 import express from "express"
+import cors from "cors"
 import listEndpoints from "express-list-endpoints"
 import mongoose from 'mongoose'
 import DeviceRoute from './src/services/devices/routes.js'
 import ReportRoute from './src/services/reports/routes.js'
+import { corsConfig } from './src/utils/serverConfig.js'
 
 const server = express()
+
+// ******************** MIDDLEWARE ******************
+server.use(cors(corsConfig));
+server.use(express.json())
 
 // ******************* ROUTES ***********************
  server.use("/device", DeviceRoute)
